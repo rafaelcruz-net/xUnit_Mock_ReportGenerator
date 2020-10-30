@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Authorizer": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

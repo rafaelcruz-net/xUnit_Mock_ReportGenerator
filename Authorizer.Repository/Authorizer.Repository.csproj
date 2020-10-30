@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.113.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Authorizer.Domain\Authorizer.Domain.csproj" />
+    <ProjectReference Include="..\Authorizer.Infrastructure\Authorizer.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
