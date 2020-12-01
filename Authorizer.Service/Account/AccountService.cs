@@ -43,7 +43,7 @@ namespace Authorizer.Service.Account
 
 
             var account = new DomainAccount.Account();
-            account.ActiveCard = false;
+            account.ActiveCard = true;
             account.AvailableLimit = new DomainAccount.ValueObjects.Limit(dto.Limit);
 
             await this.AccountRepository.Save(account);
