@@ -31,7 +31,7 @@ namespace Authorizer.Service.Account
             {
                 businessException.AddError(new BusinessValidationFailure()
                 {
-                    ErrorMessage = "account-alreadyinitialized",
+                    ErrorMessage = "account-alreadyinitialized-for-account",
                     Account = new
                     {
                         activeCard = accountInDatabase.ActiveCard,
@@ -43,7 +43,7 @@ namespace Authorizer.Service.Account
 
 
             var account = new DomainAccount.Account();
-            account.ActiveCard = dto.ActiveCard;
+            account.ActiveCard = false;
             account.AvailableLimit = new DomainAccount.ValueObjects.Limit(dto.Limit);
 
             await this.AccountRepository.Save(account);

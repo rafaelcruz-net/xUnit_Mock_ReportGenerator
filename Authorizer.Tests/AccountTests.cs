@@ -26,6 +26,8 @@ namespace Authorizer.Tests
         [Fact]
         public async Task Should_Setup_Account_Correctly()
         {
+            // 3A -> ARRANGE, ACT, ASSERT
+
             _repository = new Mock<IAccountRepository>();
             accountService = new AccountService(_repository.Object);
 
