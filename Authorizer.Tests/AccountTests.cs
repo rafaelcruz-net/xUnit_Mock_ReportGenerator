@@ -71,7 +71,7 @@ namespace Authorizer.Tests
 
             _repository.Setup(x => x.GetOneByCriteria(It.IsAny<ISpecification<Account>>())).ReturnsAsync(account).Verifiable();
 
-            await Assert.ThrowsAsync<BusinessException>(async () =>
+            var bex = await Assert.ThrowsAsync<BusinessException>(async () =>
             {
                 await accountService.CreateAccount(new Service.Account.Dto.AccountDto()
                 {
@@ -79,6 +79,8 @@ namespace Authorizer.Tests
                     Limit = 100
                 });
             });
+
+            bex.Errors.First().ErrorMessage.Should().Be("account-alreadyinitialized-for-account");
         }
 
         [Fact]
@@ -268,6 +270,27 @@ namespace Authorizer.Tests
             bex.Errors.First().ErrorMessage.Should().Be("doubled-transaction");
         }
 
+        [Fact]
+        public async Task Should_Transaction_Result_Card_Not_Initialized()
+        {
+            _repository = new Mock<IAccountRepository>();
+            accountService = new AccountService(_repository.Object);
+          
+
+            TransactionDto transaction = new TransactionDto()
+            {
+                Amount = 80,
+                Merchant = "Nubank",
+                Time = DateTime.Now
+            };
+
+            var bex = await Assert.ThrowsAsync<BusinessException>(async () =>
+            {
+                await accountService.CreateTransaction(transaction);
+            });
+
+            bex.Errors.First().ErrorMessage.Should().Be("account-not-initialized");
+        }               
 
     }
 }

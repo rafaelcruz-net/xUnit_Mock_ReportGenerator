@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Authorizer.Filter;
 using Authorizer.Repository;
 using Authorizer.Service;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,22 @@ namespace Authorizer.Api
         {
             services.AddRepository();
             services.AddServices();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                    .AddIdentityServerAuthentication(options =>
+                    {
+                        options.Authority = "https://authorizeridssrv.azurewebsites.net";
+                        options.ApiName = "Authorizer";
+                        options.ApiSecret = "123456";
+                    });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AuthorizerRole", p =>
+                {
+                    p.RequireClaim("role", "authorizer-user");
+                });
+            });
 
             services.AddControllers(o =>
             {
@@ -75,6 +92,7 @@ namespace Authorizer.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

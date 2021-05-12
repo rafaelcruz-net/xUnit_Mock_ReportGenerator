@@ -19,6 +19,9 @@ namespace Authorizer.Domain.Aggregates.Account
 
         public virtual bool ActiveCard { get; set; }
 
+        public virtual String Name { get; set; }
+
+
         public virtual Limit AvailableLimit { get; set; }
 
         public virtual IList<Transaction> Transactions { get; set; }

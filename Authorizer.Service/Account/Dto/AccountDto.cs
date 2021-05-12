@@ -9,5 +9,7 @@ namespace Authorizer.Service.Account.Dto
         public bool ActiveCard { get; set; }
         public Decimal Limit { get; set; }
 
+        public String Name { get; set; }
+
     }
 }

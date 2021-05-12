@@ -13,6 +13,7 @@ namespace Authorizer.Repository.Mapping
             Table("Account");
             Id(x => x.AccountId).GeneratedBy.Identity();
             Map(x => x.ActiveCard);
+            Map(x => x.Name);
 
             Component(x => x.AvailableLimit, member =>
             {

@@ -1,0 +1,20 @@
+
+{
+    "region" : "us-west-2",
+    "configuration" : "Release",
+    "framework"     : "netcoreapp3.1",
+    "self-contained" : false,
+    "application"    : "AuthorizerApi",
+    "environment"    : "AuthorizerApi-test",
+    "enable-xray"    : true,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-546d226c\";\"aws:ec2:vpc,Subnets\"=\"subnet-17ff4f6f\"",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.1.3 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "authorizerapi-test",
+    "instance-type"        : "m1.small",
+    "key-pair"             : "EC2-BEANSTALK",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role",
+    "proxy-server"         : "nginx"
+}

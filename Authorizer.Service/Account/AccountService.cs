@@ -45,6 +45,7 @@ namespace Authorizer.Service.Account
             var account = new DomainAccount.Account();
             account.ActiveCard = true;
             account.AvailableLimit = new DomainAccount.ValueObjects.Limit(dto.Limit);
+            account.Name = dto.Name;
 
             await this.AccountRepository.Save(account);
             this.AccountRepository.SaveChanges();
@@ -52,7 +53,8 @@ namespace Authorizer.Service.Account
             return new AccountDto()
             {
                 ActiveCard = account.ActiveCard,
-                Limit = account.AvailableLimit.Value
+                Limit = account.AvailableLimit.Value,
+                Name = account.Name
             };
 
         }

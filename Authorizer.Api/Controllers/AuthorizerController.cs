@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Authorizer.Service.Account;
 using Authorizer.Service.Account.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace Authorizer.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "authorizer-user")]
     public class AuthorizerController : ControllerBase
     {
         private IAccountService AccountService { get; set; }
@@ -22,6 +24,7 @@ namespace Authorizer.Api.Controllers
 
         [HttpPost]
         [Route("Account")]
+        
         public async Task<IActionResult> CreateAccount(AccountDto dto)
         {
             if (ModelState.IsValid == false)
@@ -35,6 +38,7 @@ namespace Authorizer.Api.Controllers
 
         [HttpPost]
         [Route("Transaction")]
+        
         public async Task<IActionResult> CreateTransaction(TransactionDto dto)
         {
             if (ModelState.IsValid == false)
