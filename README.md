@@ -1,6 +1,6 @@
 # Authorize
 
-## Account operation authorizer service for NuBank
+## Account operation authorizer service
 
 ### Description
 
