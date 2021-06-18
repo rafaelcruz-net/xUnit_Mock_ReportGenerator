@@ -118,36 +118,7 @@ namespace Authorizer.Tests
             _repository.VerifyAll();
         }
 
-        [Fact]
-        public async Task Should_Transaction_Result_In_Insufficent_Limit()
-        {
-            _repository = new Mock<IAccountRepository>();
-            accountService = new AccountService(_repository.Object);
-
-            var account = new Account()
-            {
-                ActiveCard = true,
-                AvailableLimit = new Domain.Aggregates.Account.ValueObjects.Limit(100),
-                AccountId = 1
-            };
-
-            _repository.Setup(x => x.GetOneByCriteria(It.IsAny<ISpecification<Account>>())).ReturnsAsync(account).Verifiable();
-
-            TransactionDto transaction = new TransactionDto()
-            {
-                Amount = 150,
-                Merchant = "Nubank",
-                Time = DateTime.Now
-            };
-
-            var bex = await Assert.ThrowsAsync<BusinessException>(async () =>
-            {
-                await accountService.CreateTransaction(transaction);
-            });
-
-            bex.Errors.First().ErrorMessage.Should().Be("insufficient-limit");
-
-        }
+      
 
         [Fact]
         public async Task Should_Transaction_Result_Card_Not_Active()
@@ -290,7 +261,13 @@ namespace Authorizer.Tests
             });
 
             bex.Errors.First().ErrorMessage.Should().Be("account-not-initialized");
-        }               
+        }
+
+        [Fact]
+        public async Task Should_Not_Transaction_Result_In_Insufficent_Limit()
+        {
+          
+        }
 
     }
 }

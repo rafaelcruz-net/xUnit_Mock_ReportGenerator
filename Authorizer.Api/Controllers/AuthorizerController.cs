@@ -12,7 +12,7 @@ namespace Authorizer.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "authorizer-user")]
+    //[Authorize(Roles = "authorizer-user")]
     public class AuthorizerController : ControllerBase
     {
         private IAccountService AccountService { get; set; }
